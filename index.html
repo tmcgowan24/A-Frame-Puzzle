@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Document</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+
+    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+    <a-scene>
+        <a-entity 
+        
+        light="type: ambient; color:#000"
+        environment="preset: forest;
+            groundColor: ;
+            grid: cross;
+            lighting: none;">
+        </a-entity>
+
+
+        <!-- Camera -->
+        <a-camera>
+			<a-entity cursor="fuse: true; fuseTimeout: 1000" position="0 0 -1"
+					  geometry="primitive: sphere; radius: 0.005"
+					  material="color: #000000; shader: flat; opacity: 0.5"
+                      animation__enter="property: scale;
+                                        to: 3 3 3;
+                                        dur: 1000;
+                                        easing: linear;
+                                        startEvents: mouseenter"
+                      event-set__reset="_event: animationcomplete__enter; scale: 1 1 1"
+                      animation__leave="property: scale;
+                                        to: 1 1 1;
+                                        dur: 1000;
+                                        easing: linear;
+                                        startEvents: mouseleave"
+                                        raycaster="objects: .clickable">
+			</a-entity>
+
+            <a-entity light="type: spot;
+                    target: #orange-box;
+                    color: white;
+                    angle: 30;
+                    penumbra: 0.1;
+                    castShadow: true" position="0 1 1">
+            </a-entity>
+
+        </a-camera>
+
+ 
+
+<!-- Apple riddle box -->
+
+        <a-entity position="-1 -4 -2" id="green">
+            <a-entity position="1 0 0" rotation="0 0 0">
+              <a-box width="2.5" height="1" depth="0.1" color="brown"></a-box>
+              <a-text value="
+              Click this button, and answer a riddle:
+              What has a core and is red or green?
+              What wasnt there then, but is there now?
+              what makes a doctor have sweat on his brow?" color="white" position="-1.1s 0 0.05" scale="0.5 0.5 .5"></a-text>
+            
+
+                    <!-- apple trigger -->
+            <a-box color="#AA0000" class="clickable" scale=".3 .3 .3" position="0 -0.4 .6"
+            event-set__tarpos="_event: click; _target: #yellow; position: -9.1 3 1">
+        </a-box>
+
+              
+        <a-box position="0 -1.9 0" scale="3 3 2"></a-box>
+            </a-entity>
+        </a-entity>
+           
+            <!-- red riddle trigger box -->
+		    <a-box color="#AA0000" position="9 1.5 7"class="clickable" color="brown"
+                
+                event-set__tarpos="_event: click; _target: #green; position: -1 1.5 -2">
+            </a-box>
+        </a-entity>
+
+
+        
+<a-entity position="-2 4.3 -9.5">
+        
+        <a-text color="black" value=" I want to play a game, and you are to blame.
+                        you have stolen from me, now we will see
+                        weather you die, and I mix you in with the apple pie!"> </a-text>    
+                        <a-text color="black" position="0 -1 0" value="Now, there are two piles of red boxes in the corners. One of them, will reveil your next clue"> </a-text>
+		
+ </a-entity>
+<a-box position="-9 0.5 7.5" color="brown" class="clickable"></a-box> 
+<a-box position="-9 0.5 9" color="black" class="clickable"></a-box>
+<a-box position="-9 0.1 7.5" color="brown" class="clickable"></a-box>
+<a-box position="-7.5 0.5 9" color="red" class="clickable"></a-box>
+<a-box position="-7.6 1.5 7.6" color="brown" class="clickable"></a-box>
+<a-box position="-7.4 1.5 9.1" color="red" class="clickable"></a-box>
+<a-box position="-7.5 0.5 7.5" color="black" class="clickable"></a-box>
+<a-box position="-9.1 1.5 9.1" color="red" class="clickable"></a-box>
+
+
+<a-box position="9 0.5 7.5" color="brown" class="clickable"></a-box> 
+<a-box position="9 0.5 9" color="red" class="clickable"></a-box>
+<a-box position=" 0.1 7.5" color="black" class="clickable"></a-box>
+<a-box position="9-7.5 0.5 9" color="red" class="clickable"></a-box>
+<a-box position="7.6 1.5 7.6" color="green" class="clickable"></a-box>
+<a-box position="7.4 1.5 9.1" color="red" class="clickable"></a-box>
+<a-box position="7.5 0.5 7.5" color="black" class="clickable"></a-box>
+<a-box position="9.1 1.5 9.1" color="red" class="clickable"></a-box>
+
+
+
+        
+
+        <!-- door -->
+
+		
+		<!-- Center Red sphere -->
+        <a-sphere scale=".2 .2 .2" position="-20 3 1" color="#AA0000" class="clickable" id="yellow"
+            event-set__enter="_event: mouseenter; material.color: #FF0000"
+            event-set__leave="_event: mouseleave; material.color: #AA0000"
+            event-set__tarvis="_event: click; _target: #blue; visible: false"
+            event-set__respos="_event: click; position: -1 10 10">
+        </a-sphere>
+
+
+
+		<!-- door -->
+		<a-box scale="3 5 .91" id="blue" position="0 1 -10" color="brown" visible="true"
+			   event-set__resvis="_event: click; visible: false">
+		</a-box>
+
+
+
+
+
+
+
+
+                <a-entity position="0 0 -5">
+            <!-- Tree board -->
+            <a-box scale=".5 3 3" position="-9.5 2 1" color="brown"></a-box>
+            <a-box scale=".2 2.5 2.5" position="-9.2 2 1" color="green"></a-box>
+            <!-- left -->
+            <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+            <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1.8" color="red"></a-sphere>
+            <a-sphere scale=".2 .2 .2" position="-9.1 1 1.8" color="red"></a-sphere>
+            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1.8" color="red"></a-sphere>
+            <!-- center -->
+            <a-sphere scale=".2 .2 .2" position="-9.1 2 1" color="red"></a-sphere>
+            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1" color="red"></a-sphere>
+            <a-sphere scale=".2 .2 .2" position="-9.1 1 1" color="red"></a-sphere>
+            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1" color="red"></a-sphere>
+            <!-- right -->
+            <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+            <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 .2" color="red"></a-sphere>
+            <a-sphere scale=".2 .2 .2" position="-9.1 1 .2" color="red"></a-sphere>
+            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 .2" color="red"></a-sphere>
+                </a-entity>
+
+
+
+
+
+                         <a-entity position="0 0 5">
+                    <!-- Tree board -->
+                    <a-box scale=".5 3 3" position="-9.5 2 1" color="brown"></a-box>
+                    <a-box scale=".2 2.5 2.5" position="-9.2 2 1" color="green"></a-box>
+                    <!-- left -->
+                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1.8" color="red"></a-sphere>
+                    <a-sphere scale=".2 .2 .2" position="-9.1 1 1.8" color="red"></a-sphere>
+                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1.8" color="red"></a-sphere>
+                    <!-- center -->
+                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1" color="red"></a-sphere>
+                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1" color="red"></a-sphere>
+                    <a-sphere scale=".2 .2 .2" position="-9.1 1 1" color="red"></a-sphere>
+                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1" color="red"></a-sphere>
+                    <!-- right -->
+                    <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                    <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 .2" color="red"></a-sphere>
+                    <a-sphere scale=".2 .2 .2" position="-9.1 1 .2" color="red"></a-sphere>
+                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 .2" color="red"></a-sphere>
+                        </a-entity>
+        
+
+
+                             <a-entity position="0 0 -5" rotation="0 180 0">
+                            <!-- Tree board -->
+                            <a-box scale=".5 3 3" position="-9.5 2 1" color="brown"></a-box>
+                            <a-box scale=".2 2.5 2.5" position="-9.2 2 1" color="green"></a-box>
+                            <!-- left -->
+                            <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                            <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1.8" color="red"></a-sphere>
+                            <a-sphere scale=".2 .2 .2" position="-9.1 1 1.8" color="red"></a-sphere>
+                            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1.8" color="red"></a-sphere>
+                            <!-- center -->
+                            <a-sphere scale=".2 .2 .2" position="-9.1 2 1" color="red"></a-sphere>
+                            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1" color="red"></a-sphere>
+                            <a-sphere scale=".2 .2 .2" position="-9.1 1 1" color="red"></a-sphere>
+                            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1" color="red"></a-sphere>
+                            <!-- right -->
+                            <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                            <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 .2" color="red"></a-sphere>
+                            <a-sphere scale=".2 .2 .2" position="-9.1 1 .2" color="red"></a-sphere>
+                            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 .2" color="red"></a-sphere>
+                                </a-entity>
+                
+
+                                        <a-entity position="0 0 0" rotation="0 180 0">
+                                    <!-- Tree board -->
+                                    <a-box scale=".5 3 3" position="-9.5 2 1" color="brown"></a-box>
+                                    <a-box scale=".2 2.5 2.5" position="-9.2 2 1" color="green"></a-box>
+                                    <!-- left -->
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1.8" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 1 1.8" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1.8" color="red"></a-sphere>
+                                    <!-- center -->
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 1 1" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1" color="red"></a-sphere>
+                                    <!-- right -->
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 .2" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 1 .2" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 .2" color="red"></a-sphere>
+                                        </a-entity>
+
+
+
+
+                                        <a-entity position="0 0 5" rotation="0 180 0">
+                                    <!-- Tree board -->
+                                    <a-box scale=".5 3 3" position="-9.5 2 1" color="brown"></a-box>
+                                    <a-box scale=".2 2.5 2.5" position="-9.2 2 1" color="green"></a-box>
+                                    <!-- left -->
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1.8" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 1 1.8" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1.8" color="red"></a-sphere>
+                                    <!-- center -->
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 1 1" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1" color="red"></a-sphere>
+                                    <!-- right -->
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 .2" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 1 .2" color="red"></a-sphere>
+                                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 .2" color="red"></a-sphere>
+                                        </a-entity>
+
+
+
+
+
+
+                                        <a-entity position="0 0 0" rotation="0 90 0">
+                                            <!-- Tree board -->
+                                            <a-box scale=".5 3 3" position="-9.5 2 1" color="brown"></a-box>
+                                            <a-box scale=".2 2.5 2.5" position="-9.2 2 1" color="green"></a-box>
+                                            <!-- left -->
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1.8" color="red"></a-sphere>
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 1 1.8" color="red"></a-sphere>
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1.8" color="red"></a-sphere>
+                                            <!-- center -->
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 1" color="red"></a-sphere>
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1" color="red"></a-sphere>
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 1 1" color="red"></a-sphere>
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1" color="red"></a-sphere>
+                                            <!-- right -->
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 .2" color="red"></a-sphere>
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 1 .2" color="red"></a-sphere>
+                                            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 .2" color="red"></a-sphere>
+                                                </a-entity>
+        
+
+
+                                                <a-entity position="5 0 0" rotation="0 90 0">
+                                                    <!-- Tree board -->
+                                                    <a-box scale=".5 3 3" position="-9.5 2 1" color="brown"></a-box>
+                                                    <a-box scale=".2 2.5 2.5" position="-9.2 2 1" color="green"></a-box>
+                                                    <!-- left -->
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1.8" color="red"></a-sphere>
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 1 1.8" color="red"></a-sphere>
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1.8" color="red"></a-sphere>
+                                                    <!-- center -->
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1" color="red"></a-sphere>
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1" color="red"></a-sphere>
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 1 1" color="red"></a-sphere>
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1" color="red"></a-sphere>
+                                                    <!-- right -->
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 .2" color="red"></a-sphere>
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 1 .2" color="red"></a-sphere>
+                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 .2" color="red"></a-sphere>
+                                                        </a-entity>
+
+
+
+                                                        <a-entity position="-5 0 0" rotation="0 90 0">
+                                                            <!-- Tree board -->
+                                                            <a-box scale=".5 3 3" position="-9.5 2 1" color="brown"></a-box>
+                                                            <a-box scale=".2 2.5 2.5" position="-9.2 2 1" color="green"></a-box>
+                                                            <!-- left -->
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1.8" color="red"></a-sphere>
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 1 1.8" color="red"></a-sphere>
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1.8" color="red"></a-sphere>
+                                                            <!-- center -->
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 1" color="red"></a-sphere>
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1" color="red"></a-sphere>
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 1 1" color="red"></a-sphere>
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1" color="red"></a-sphere>
+                                                            <!-- right -->
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 .2" color="red"></a-sphere>
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 1 .2" color="red"></a-sphere>
+                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 .2" color="red"></a-sphere>
+                                                                </a-entity>
+
+
+
+                                                                <a-entity position="6 0 0" rotation="0 -90 0">
+                                                                    <!-- Tree board -->
+                                                                    <a-box scale=".5 3 3" position="-9.5 2 1" color="brown"></a-box>
+                                                                    <a-box scale=".2 2.5 2.5" position="-9.2 2 1" color="green"></a-box>
+                                                                    <!-- left -->
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1.8" color="red"></a-sphere>
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 1 1.8" color="red"></a-sphere>
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1.8" color="red"></a-sphere>
+                                                                    <!-- center -->
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 1" color="red"></a-sphere>
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1" color="red"></a-sphere>
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 1 1" color="red"></a-sphere>
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1" color="red"></a-sphere>
+                                                                    <!-- right -->
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 1.5 .2" color="red"></a-sphere>
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 1 .2" color="red"></a-sphere>
+                                                                    <a-sphere scale=".2 .2 .2" position="-9.1 2.5 .2" color="red"></a-sphere>
+                                                                        </a-entity>
+
+                                                                        <a-entity position="-5 0 0" rotation="0 -90 0">
+                                                                            <!-- Tree board -->
+                                                                            <a-box scale=".5 3 3" position="-9.5 2 1" color="brown"></a-box>
+                                                                            <a-box scale=".2 2.5 2.5" position="-9.2 2 1" color="green"></a-box>
+                                                                            <!-- left -->
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1.8" color="red"></a-sphere>
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 1 1.8" color="red"></a-sphere>
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1.8" color="red"></a-sphere>
+                                                                            <!-- center -->
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 1" color="red"></a-sphere>
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 1" color="red"></a-sphere>
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 1 1" color="red"></a-sphere>
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 1" color="red"></a-sphere>
+                                                                            <!-- right -->
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 1.5 .2" color="red"></a-sphere>
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 1 .2" color="red"></a-sphere>
+                                                                            <a-sphere scale=".2 .2 .2" position="-9.1 2.5 .2" color="red"></a-sphere>
+                                                                                </a-entity>
+
+
+
+
+<!-- Tree board -->
+<a-box scale=".5 3 3" position="-9.5 2 1" color="brown"></a-box>
+
+<a-box scale=".2 2.5 2.5" position="-9.2 2 1" color="green"></a-box>
+
+
+
+
+<!-- "tree" -->
+
+
+<!-- left -->
+<a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+
+<a-sphere scale=".2 .2 .2" position="-9.1 2 1.8" color="red"></a-sphere>
+
+<a-sphere scale=".2 .2 .2" position="-9.1 1.5 1.8" color="red"></a-sphere>
+
+<a-sphere scale=".2 .2 .2" position="-9.1 1 1.8" color="red"></a-sphere>
+
+<a-sphere scale=".2 .2 .2" position="-9.1 2.5 1.8" color="red"></a-sphere>
+
+<!-- center -->
+<a-sphere scale=".2 .2 .2" position="-9.1 2 1" color="red"></a-sphere>
+
+<a-sphere scale=".2 .2 .2" position="-9.1 1.5 1" color="red"></a-sphere>
+
+<a-sphere scale=".2 .2 .2" position="-9.1 1 1" color="red"></a-sphere>
+
+<a-sphere scale=".2 .2 .2" position="-9.1 2.5 1" color="red"></a-sphere>
+
+<!-- right -->
+<a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+
+<a-sphere scale=".2 .2 .2" position="-9.1 2 .2" color="red"></a-sphere>
+
+<a-sphere scale=".2 .2 .2" position="-9.1 1.5 .2" color="red"></a-sphere>
+
+<a-sphere scale=".2 .2 .2" position="-9.1 1 .2" color="red"></a-sphere>
+
+<a-sphere scale=".2 .2 .2" position="-9.1 2.5 .2" color="red"></a-sphere>
+
+
+
+
+        <!-- Front of house -->
+
+        <a-box position="-6 0 -10" rotation="0 0 0" scale="9 10 1" shadow></a-box>
+
+        <a-box position="6 0 -10" rotation="0 0 0" scale="9 10 1" shadow></a-box>
+
+        <a-box position="0 4 -10" rotation="0 0 0" scale="3 2 1" shadow></a-box>
+
+        <a-box position="0 0 10" rotation="0 0 0" scale="21 10 1" shadow></a-box>
+
+        <a-box position="10 0 0" rotation="0 90 0" scale="19 10 1" shadow></a-box>
+
+        <a-box position="-10 0 0" rotation="0 90 0" scale="19 10 1" shadow></a-box>
+
+        <a-box position="0 5 0" rotation="0 0 0" scale="20 0 20" shadow></a-box>
+
+
+
+
+        <a-sky color="black " material="shader: flat"></a-sky>
+
+
+    </a-scene>
+
+  
+</body>
+
+</html>
